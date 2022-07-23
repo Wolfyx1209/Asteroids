@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,6 +6,8 @@ public class GameManager : MonoBehaviour
     public Player player;
     private Transform _playerTransform;
     private GameObject _playerGameObject;
+    public ScoreText scoreText;
+
     public int lives = 3;
     public int score = 0;
     public float respawnTime = 3.0f;
@@ -15,6 +18,7 @@ public class GameManager : MonoBehaviour
         _playerTransform = player.transform;
         _playerGameObject = player.gameObject;
     }
+    
 
     public void AsteroidDestroyed(Asteroid asteroid)
     {
@@ -30,7 +34,7 @@ public class GameManager : MonoBehaviour
         {
             score += 10;
         }
-        
+        scoreText.DisplayScore(score);
     }
     
     public void PlayerDied()

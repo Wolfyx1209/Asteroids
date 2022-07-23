@@ -2,12 +2,16 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ScoreText : MonoBehaviour
 {
-    private TMP_Text _tmpText;
-
-    private void Start()
+    private TMP_Text _textGameObject;
+    private void Awake()
     {
-        _tmpText = GetComponent<TMP_Text>();
+        _textGameObject = gameObject.GetComponent<TMP_Text>();
+    }
+
+    public void DisplayScore(int score)
+    {
+        _textGameObject.text = $"Score: {score}";
     }
 }
