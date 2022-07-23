@@ -9,7 +9,7 @@ public class AsteroidSpawner : MonoBehaviour
     public float spawnDistance = 15.0f;
     private void Start()
     {
-        InvokeRepeating(nameof(Spawn), spawnRate, spawnRate); // не понял
+        InvokeRepeating(nameof(Spawn), spawnRate, spawnRate);
     }
 
     private void Spawn()

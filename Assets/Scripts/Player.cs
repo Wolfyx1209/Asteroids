@@ -1,18 +1,22 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Bullet bulletPrefab;
     public float thrustSpeed = 1.0f;
     public float turnSpeed = 1.0f;
-    private Rigidbody2D _rigidbody;
     private bool _thrusting;    
     private float _turnDirection;
+
+    public Bullet bulletPrefab;
+    private Rigidbody2D _rigidbody;
+    private GameManager _gameManager;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
@@ -54,7 +58,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         Bullet bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-        bullet.Project(transform.up); //transform.up - это вверх относительно оси координат или game object'а
+        bullet.Project(transform.up);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,7 +68,7 @@ public class Player : MonoBehaviour
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.angularVelocity = 0.0f;
             gameObject.SetActive(false);
-            FindObjectOfType<GameManager>().PlayerDied(); // не понял
+            _gameManager.PlayerDied();
         }
     }
 }

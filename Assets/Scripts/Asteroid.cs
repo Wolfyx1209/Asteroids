@@ -14,17 +14,18 @@ public class Asteroid : MonoBehaviour
     public Sprite[] sprites;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidbody;
+    private GameManager _gameManager;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Start()
     {
-        _spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)]; // как рандомятся спрайты
-
+        _spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
         transform.eulerAngles = new Vector3(0.0f, 0.0f, Random.value * 360.0f);
         transform.localScale = Vector3.one * size;
         _rigidbody.mass = size;
@@ -44,7 +45,7 @@ public class Asteroid : MonoBehaviour
                 CreateSplit();
                 CreateSplit();
             }
-            FindObjectOfType<GameManager>().AsteroidDestroyed(this);
+            _gameManager.AsteroidDestroyed(this);
             Destroy(gameObject);
         }
     }
@@ -58,5 +59,4 @@ public class Asteroid : MonoBehaviour
         
         half.SetTrajectory(Random.insideUnitCircle.normalized * speed);
     }
-    
 }
