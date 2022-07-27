@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,14 +8,10 @@ public class Player : MonoBehaviour
     private float _turnDirection;
 
     public Bullet bulletPrefab;
-    private Rigidbody2D _rigidbody;
-    private GameManager _gameManager;
+    public Rigidbody2D rigidBody;
+    public GameManager gameManager;
 
-    private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _gameManager = FindObjectOfType<GameManager>();
-    }
+    
 
     private void Update()
     {
@@ -46,12 +40,12 @@ public class Player : MonoBehaviour
     {
         if (_thrusting)
         {
-            _rigidbody.AddForce(transform.up * thrustSpeed);
+            rigidBody.AddForce(transform.up * thrustSpeed);
         }
 
         if (_turnDirection != 0.0f)
         {
-            _rigidbody.AddTorque(_turnDirection * turnSpeed);
+            rigidBody.AddTorque(_turnDirection * turnSpeed);
         }
     }
 
@@ -65,10 +59,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Asteroid"))
         {
-            _rigidbody.velocity = Vector2.zero;
-            _rigidbody.angularVelocity = 0.0f;
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.angularVelocity = 0.0f;
             gameObject.SetActive(false);
-            _gameManager.PlayerDied();
+            gameManager.PlayerDied();
         }
     }
 }

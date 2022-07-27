@@ -1,5 +1,3 @@
-using System;
-using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,27 +10,26 @@ public class Asteroid : MonoBehaviour
     public float maxLifeTime = 30.0f;
     
     public Sprite[] sprites;
-    private SpriteRenderer _spriteRenderer;
-    private Rigidbody2D _rigidbody;
-    private GameManager _gameManager;
+    public SpriteRenderer spriteRenderer;
+    public Rigidbody2D rigidBody;
+    public GameManager gameManager;
+    
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Start()
     {
-        _spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
+        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
         transform.eulerAngles = new Vector3(0.0f, 0.0f, Random.value * 360.0f);
         transform.localScale = Vector3.one * size;
-        _rigidbody.mass = size;
+        rigidBody.mass = size;
     }
     public void SetTrajectory(Vector2 direction)
     {
-        _rigidbody.AddForce(direction * speed);
+        rigidBody.AddForce(direction * speed);
         Destroy(gameObject, maxLifeTime);
     }
 
@@ -45,7 +42,7 @@ public class Asteroid : MonoBehaviour
                 CreateSplit();
                 CreateSplit();
             }
-            _gameManager.AsteroidDestroyed(this);
+            gameManager.AsteroidDestroyed(this);
             Destroy(gameObject);
         }
     }

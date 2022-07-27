@@ -156,3 +156,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f2823d5c3990e9249b516a489da95bc8, type: 3}
   - {fileID: 21300000, guid: 6f10d923ebb0cf0478ed3f6de8979c1c, type: 3}
   - {fileID: 21300000, guid: cbe169ccca490bc4d946ba9fc4a31be8, type: 3}
+  spriteRenderer: {fileID: 9162604624637965471}
+  rigidBody: {fileID: 803829869337656384}
+  gameManager: {fileID: 0}

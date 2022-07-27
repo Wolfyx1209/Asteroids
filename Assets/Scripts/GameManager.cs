@@ -3,23 +3,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
-    private Transform _playerTransform;
-    private GameObject _playerGameObject;
+    public Transform playerTransform;
+    public GameObject playerGameObject;
     public ScoreText scoreText;
+    public LivesText livesText;
+    
 
     public int lives = 3;
     public int score = 0;
     public float respawnTime = 3.0f;
     public float respawnInvulnerabilityTime = 3.0f;
-
-    private void Awake()
-    {
-        _playerTransform = player.transform;
-        _playerGameObject = player.gameObject;
-    }
     
-
     public void AsteroidDestroyed(Asteroid asteroid)
     {
         if (asteroid.size <= 0.75f)
@@ -49,20 +43,20 @@ public class GameManager : MonoBehaviour
         {
             Invoke(nameof(Respawn), respawnTime);
         }
-        
+        livesText.DisplayLives(lives);
     }
 
     private void Respawn()
     {
-        _playerTransform.position = Vector3.zero;
-        _playerGameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
-        _playerGameObject.SetActive(true);
+        playerTransform.position = Vector3.zero;
+        playerGameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
+        playerGameObject.SetActive(true);
         Invoke(nameof(TurnOnCollisions), respawnInvulnerabilityTime);
     }
 
     private void TurnOnCollisions()
     {
-        _playerGameObject.layer = LayerMask.NameToLayer("Player");
+        playerGameObject.layer = LayerMask.NameToLayer("Player");
     }
     
 
