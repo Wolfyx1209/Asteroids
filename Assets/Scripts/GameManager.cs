@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,12 +8,14 @@ public class GameManager : MonoBehaviour
     public GameObject playerGameObject;
     public ScoreText scoreText;
     public LivesText livesText;
-    
+
 
     public int lives = 3;
     public int score = 0;
     public float respawnTime = 3.0f;
     public float respawnInvulnerabilityTime = 3.0f;
+
+    
     
     public void AsteroidDestroyed(Asteroid asteroid)
     {
@@ -35,11 +38,7 @@ public class GameManager : MonoBehaviour
     {
         lives--;
 
-        if (lives <= 0)
-        {
-            GameOver();
-        }
-        else
+        if (lives != 0)
         {
             Invoke(nameof(Respawn), respawnTime);
         }
@@ -57,13 +56,5 @@ public class GameManager : MonoBehaviour
     private void TurnOnCollisions()
     {
         playerGameObject.layer = LayerMask.NameToLayer("Player");
-    }
-    
-
-    private void GameOver()
-    {
-        lives = 3;
-        score = 0;
-        Invoke(nameof(Respawn), respawnTime);
     }
 }

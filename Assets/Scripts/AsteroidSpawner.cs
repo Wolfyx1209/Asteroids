@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
     public Asteroid asteroidPrefab;
+    public List<Asteroid> asteroidsList = new List<Asteroid>();
+    
     public float trajectoryVariance = 15.0f;
     public float spawnRate = 2.0f;
     public int spawnAmount = 1;
@@ -23,6 +26,7 @@ public class AsteroidSpawner : MonoBehaviour
             Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward); // не понял
             
             Asteroid asteroid = Instantiate(asteroidPrefab, spawnPoint, rotation);
+            asteroidsList.Add(asteroid);
             asteroid.size = Random.Range(asteroid.minsize, asteroid.maxsize);
             asteroid.SetTrajectory(rotation * -spawnDirection);
         }
