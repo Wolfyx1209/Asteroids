@@ -1,48 +1,59 @@
-using System;
+using Counters;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public Transform playerTransform;
     public GameObject playerGameObject;
-    public ScoreText scoreText;
-    public LivesText livesText;
-
-
-    public int lives = 3;
-    public int score = 0;
+    public MenuManager menuManager;
+    
     public float respawnTime = 3.0f;
     public float respawnInvulnerabilityTime = 3.0f;
 
-    
-    
+    // public delegate void LivesChangedHandler(int lives, int oldLives);
+    // public event LivesChangedHandler OnLivesChanged;
+
+    public CounterCollection Counters { get; private set; }// не могу из вне поменять 
+
+    void Start()
+    {
+        Counters = new CounterCollection
+        {
+            { "lives", new Counter(3) },
+            { "score", new Counter() }
+        };
+        menuManager.Init();
+    }
+
     public void AsteroidDestroyed(Asteroid asteroid)
     {
+        var score = Counters["score"];
+        
         if (asteroid.size <= 0.75f)
         {
-            score += 50;
+            score.Add(50);
         }
         else if (asteroid.size <= 1.2f)
         {
-            score += 25;
+            score.Add(25);
         }
         else
         {
-            score += 10;
+            score.Add(10);
         }
-        scoreText.DisplayScore(score);
+        
     }
     
     public void PlayerDied()
     {
-        lives--;
+        var lives = Counters["lives"];
+        
+        lives.Add(-1);
 
-        if (lives != 0)
+        if (lives.Amount != 0)
         {
             Invoke(nameof(Respawn), respawnTime);
         }
-        livesText.DisplayLives(lives);
     }
 
     private void Respawn()

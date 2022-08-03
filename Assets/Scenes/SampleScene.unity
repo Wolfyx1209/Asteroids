@@ -155,7 +155,7 @@ MonoBehaviour:
   game: {fileID: 526838518}
   mainMenu: {fileID: 506362814}
   pauseMenu: {fileID: 2138613835}
-  gameManeger: {fileID: 1136373064}
+  gameManager: {fileID: 1136373064}
   gameOverPanel: {fileID: 1402206127}
 --- !u!4 &54747268
 Transform:
@@ -170,7 +170,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &141707477
 GameObject:
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textGameObject: {fileID: 141707480}
+  gameManager: {fileID: 1136373064}
 --- !u!114 &141707480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,7 +1367,6 @@ Transform:
   - {fileID: 1278279456}
   - {fileID: 330112839}
   - {fileID: 1355045389}
-  - {fileID: 1136373065}
   - {fileID: 1806606642}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1693,18 +1693,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 54747267}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: ToMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 54747267}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: SceneLoader
         m_Mode: 1
         m_Arguments:
@@ -2008,10 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 330112839}
   playerGameObject: {fileID: 330112834}
-  scoreText: {fileID: 141707479}
-  livesText: {fileID: 1328558230}
-  lives: 3
-  score: 0
+  menuManager: {fileID: 54747267}
   respawnTime: 3
   respawnInvulnerabilityTime: 3
 --- !u!4 &1136373065
@@ -2026,8 +2011,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 526838519}
-  m_RootOrder: 6
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1175393997
 GameObject:
@@ -2374,6 +2359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textGameObject: {fileID: 1328558231}
+  gameManager: {fileID: 1136373064}
 --- !u!114 &1328558231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,7 +2487,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: -140019084188992108, guid: f8e825f17d00d044e9aa509c9c35ab51, type: 3}
-  asteroidsList: []
   trajectoryVariance: 15
   spawnRate: 2
   spawnAmount: 1
@@ -2887,7 +2872,7 @@ RectTransform:
   - {fileID: 1328558229}
   - {fileID: 1402206128}
   m_Father: {fileID: 526838519}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

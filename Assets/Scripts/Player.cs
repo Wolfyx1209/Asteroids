@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         bullet.Project(transform.up);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)// перевести на события
     {
         if (collision.gameObject.CompareTag("Asteroid"))
         {

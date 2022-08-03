@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AsteroidSpawner : MonoBehaviour
 {
     public Asteroid asteroidPrefab;
-    public List<Asteroid> asteroidsList = new List<Asteroid>();
-    
+
     public float trajectoryVariance = 15.0f;
     public float spawnRate = 2.0f;
     public int spawnAmount = 1;
@@ -15,18 +16,23 @@ public class AsteroidSpawner : MonoBehaviour
         InvokeRepeating(nameof(Spawn), spawnRate, spawnRate);
     }
 
+    private void Update()
+    {
+        //Debug.DrawLine(new Vector3(0,0,0), new Vector3(0,0,1), Color.green, 1000);
+        
+    }
+
     private void Spawn()
     {
-        for (int i = 0; i < spawnAmount; i++)
+        for (var i = 0; i < spawnAmount; i++)
         {
             Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
-            Vector3 spawnPoint = transform.position + spawnDirection;
+            var spawnPoint = transform.position + spawnDirection;
 
-            float variance = Random.Range(-trajectoryVariance, trajectoryVariance);
-            Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward); // не понял
-            
-            Asteroid asteroid = Instantiate(asteroidPrefab, spawnPoint, rotation);
-            asteroidsList.Add(asteroid);
+            var variance = Random.Range(-trajectoryVariance, trajectoryVariance);
+            var rotation = Quaternion.AngleAxis(variance, Vector3.forward); // не понял
+            // Debug.DrawLine(Vector3.forward, Vector3.forward*10, Color.green, 1000);
+            var asteroid = Instantiate(asteroidPrefab, spawnPoint, rotation);
             asteroid.size = Random.Range(asteroid.minsize, asteroid.maxsize);
             asteroid.SetTrajectory(rotation * -spawnDirection);
         }

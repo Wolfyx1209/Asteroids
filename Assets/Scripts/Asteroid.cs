@@ -40,7 +40,7 @@ public class Asteroid : MonoBehaviour
             if (size * 0.5f >= minsize)
             {
                 CreateSplit();
-                CreateSplit();
+                CreateSplit(); // сделать цикл
             }
             gameManager.AsteroidDestroyed(this);
             Destroy(gameObject);
